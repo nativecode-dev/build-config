@@ -68,8 +68,9 @@ module.exports = core => {
 
     const task = (key, value) => {
       const name = core.taskname(names.build, key)
-      return configuration.builds[name] = {
+      return configuration.builds[key] = {
         build: value.build || value,
+        name: name,
         source: core.array(source(key) || source(value.src)),
         target: value.dest || common.dest
       }
@@ -77,7 +78,8 @@ module.exports = core => {
 
     const watch = (key, value) => {
       const name = core.taskname(names.watch, key)
-      return configuration.watches[name] = {
+      return configuration.watches[key] = {
+        name: name,
         source: core.array(source(key) || source(value.src)),
         target: value.dest || common.dest
       }
