@@ -1,7 +1,7 @@
 const core = require('./core.js')
 const configurator = require('./configurator.js')(core)
-const nosupport = () => {
-  throw new Error('Method not supported.')
+const nosupport = method => {
+  throw new Error('Method ' + method + 'not supported.')
 }
 
 module.exports = (definition, methods) => {
@@ -13,7 +13,7 @@ module.exports = (definition, methods) => {
       if (methods[method]) {
         methods[method](configuration)
       } else {
-        nosupport()
+        nosupport(method)
       }
       return api
     }
