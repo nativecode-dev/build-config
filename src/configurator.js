@@ -84,8 +84,8 @@ module.exports = core => {
     }
 
     const definitions = Object.keys(config).filter(key => ['common', 'options'].indexOf(key) < 0)
-    definitions.map(key => configuration.builds[key] = task(key, config[key]))
-    definitions.map(key => configuration.watches[key] = watch(key, config[key]))
+    definitions.map(key => task(key, config[key]))
+    definitions.map(key => watch(key, config[key]))
 
     return configuration
   }
