@@ -9,17 +9,21 @@ module.exports = (definition, methods) => {
   const configuration = configurator(definition)
 
   const define = method => {
-    if (methods[method]) {
-      methods[method](configuration)
-    } else {
-      nosupport()
+    return () => {
+      if (methods[method]) {
+        methods[method](configuration)
+      } else {
+        nosupport()
+      }
+      return api
     }
-    return api
   }
 
   api.build = define('build')
+  api.clean = define('clean')
   api.deploy = define('deploy')
   api.package = define('package')
+  api.publish = define('publish')
   api.watch = define('watch')
 
   return api
