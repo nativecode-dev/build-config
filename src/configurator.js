@@ -58,7 +58,7 @@ module.exports = core => {
       watches: {}
     }
 
-    const source = function (src) {
+    const source = src => {
       if (!src) return []
       if (typeof src === 'array' && src.length) return src
       if (typeof src === 'function') return src()
@@ -66,7 +66,7 @@ module.exports = core => {
       return undefined
     }
 
-    const task = function (key, value) {
+    const task = (key, value) => {
       const name = core.taskname(names.build, key)
       return configuration.builds[name] = {
         build: value.build || value,
@@ -75,7 +75,7 @@ module.exports = core => {
       }
     }
 
-    const watch = function (key, value) {
+    const watch = (key, value) => {
       const name = core.taskname(names.watch, key)
       return configuration.watches[name] = {
         source: core.array(source(key) || source(value.src)),

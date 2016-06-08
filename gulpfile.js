@@ -19,7 +19,7 @@ gulp.bt.reload('test').when({
 
 gulp.bt.publish({ tasks: ['test']}).npm()
 
-gulp.task('default', ['build'])
+gulp.task('default', ['test'])
 
 gulp.task('test', ['build'], () => {
   return gulp.src('test/**/*.js', {read: false})
