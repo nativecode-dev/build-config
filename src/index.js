@@ -9,9 +9,9 @@ module.exports = (definition, methods) => {
   const configuration = configurator(definition)
 
   const define = method => {
-    return () => {
+    return options => {
       if (methods[method]) {
-        methods[method](configuration)
+        methods[method](configuration, options)
       } else {
         nosupport(method)
       }
