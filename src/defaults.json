@@ -10,10 +10,16 @@
       "css": [
         "src/**/*.css"
       ],
+      "csslint": [
+        "src/**/*.css"
+      ],
       "html": [
         "src/**/*.html"
       ],
       "less": [
+        "src/**/*.less"
+      ],
+      "lesslint": [
         "src/**/*.less"
       ],
       "javascript": [
@@ -22,11 +28,21 @@
       "js": [
         "src/**/*.js"
       ],
+      "jslint": [
+        "src/**/*.js"
+      ],
       "sass": [
         "src/**/*.sass",
         "src/**/*.scss"
       ],
+      "sasslint": [
+        "src/**/*.sass",
+        "src/**/*.scss"
+      ],
       "ts": [
+        "src/**.*.ts"
+      ],
+      "tslint": [
         "src/**.*.ts"
       ],
       "typescript": [

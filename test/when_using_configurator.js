@@ -10,8 +10,11 @@ describe('when using the configurator', () => {
       js: {
         build: stream => stream
           .pipe(() => true),
-        src: 'javascript'
-      }
+        src: 'javascript',
+        tasks: ['jslint']
+      },
+      jslint: stream => stream
+        .pipe(() => true)
     }
 
     it('should create html configuration', () => {
@@ -24,14 +27,24 @@ describe('when using the configurator', () => {
       expect(configuration.watches.html.source).eql(configuration.common.sources.html)
     })
 
-    it('should create javascript configuration', () => {
+    it('should create js configuration', () => {
       const configuration = configurator(definition)
       expect(configuration.builds.js.source).eql(configuration.common.sources.js)
     })
 
-    it('should create javascript watcher', () => {
+    it('should create js watcher', () => {
       const configuration = configurator(definition)
       expect(configuration.watches.js.source).eql(configuration.common.sources.js)
+    })
+
+    it('should create jslint configuration', () => {
+      const configuration = configurator(definition)
+      expect(configuration.builds.jslint.source).eql(configuration.common.sources.js)
+    })
+
+    it('should create jslint watcher', () => {
+      const configuration = configurator(definition)
+      expect(configuration.watches.jslint.source).eql(configuration.common.sources.js)
     })
   })
 })

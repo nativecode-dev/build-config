@@ -16,8 +16,28 @@ const core = {
       return false
     }
   },
+  filters: {
+    arrays: (key, hash) => core.is.array(hash[key]),
+    functions: (key, hash) => core.is.func(hash[key]),
+    objects: (key, hash) => core.is.object(hash[key]),
+    strings: (key, hash) => core.is.string(hash[key]),
+  },
   fs: require('fs'),
+  is: {
+    array: value => value && value instanceof Array,
+    func: value => value && typeof value === 'function',
+    object: value => value && typeof value === 'object',
+    string: value => value && typeof value === 'string'
+  },
   json: filename => JSON.parse(core.buffer(filename)),
+  mapdeep: (hash, action) => {
+    Object.keys(hash).map(key => {
+      const value = action(key, hash[key])
+      if (core.is.array(value) || core.is.object(value)) {
+        core.mapdeep(value, action)
+      }
+    })
+  },
   merge: require('merge'),
   path: require('path'),
   resolve: (hash, root) => {
@@ -26,7 +46,7 @@ const core = {
       var value = hash[key]
       if (value && value.length && value.indexOf(':') === 0) {
         hash[key] = render(value, root).substring(1)
-      } else if (value instanceof Object) {
+      } else if (value && typeof value === 'object') {
         core.resolve(value, root)
       }
     })
