@@ -1,4 +1,4 @@
-const configurator = require('../dist/index.js')
+const config = require('../dist/index.js')
 const expect = require('chai').expect
 
 describe('when writing plugin methods', () => {
@@ -12,7 +12,8 @@ describe('when writing plugin methods', () => {
   }
 
   describe('should be able to override build', () => {
-    const api = configurator(definition, {
+    const api = config(definition, {
+      configfile: 'test/test.json',
       methods: {build: configuration => true }
     })
 

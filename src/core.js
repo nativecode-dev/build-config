@@ -1,5 +1,3 @@
-const render = require('mustache').render
-
 const core = {
   array: value => core.is.array(value) ? value : value ? [value] : [],
   buffer: filename => new Buffer(core.stream(filename)),
@@ -39,8 +37,9 @@ const core = {
       }
     })
   },
-  merge: require('merge'),
+  merge: require('merge').recursive,
   path: require('path'),
+  render: require('mustache').render,
   require: value => {
     if (!value) throw new Error('Required value was not provided')
   },
@@ -49,7 +48,7 @@ const core = {
     Object.keys(hash).map(key => {
       var value = hash[key]
       if (value && value.length && value.indexOf(':') === 0) {
-        hash[key] = render(value, root).substring(1)
+        hash[key] = core.render(value, root).substring(1)
       } else if (value && typeof value === 'object') {
         core.resolve(value, root)
       }

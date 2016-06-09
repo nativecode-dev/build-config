@@ -1,14 +1,14 @@
 module.exports = (core, adapter) => {
   core.require(adapter)
-  const loader = require('./loader.js')(core)
+  const loader = require('./conf.js')(core)
 
   return config => {
     core.require(config)
-    const defaults = core.merge({debug: !!process.env.debug}, loader(adapter.configfile))
+    const defaults = core.merge(true, loader(adapter.configfile), { common: { debug: !!process.env.debug } })
 
-    const common = core.merge({}, defaults.common, config.common)
-    const options = core.merge({}, defaults.options, config.options)
-    const names = core.merge({}, defaults.options.overrides.names, options.overrides.names)
+    const common = core.merge(true, defaults.common, config.common)
+    const options = core.merge(true, defaults.options, config.options)
+    const names = core.merge(true, defaults.options.overrides.names, options.overrides.names)
 
     const configuration = {
       common: common,

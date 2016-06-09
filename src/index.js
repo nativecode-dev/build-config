@@ -1,4 +1,5 @@
 const core = require('./core.js')
+const configurator = require('./configurator.js')
 
 const defadapter = {
   configfile: undefined,
@@ -10,19 +11,18 @@ const nosupport = method => {
 }
 
 module.exports = (definition, adapter) => {
-  adapter = core.merge({}, defadapter, adapter)
+  adapter = core.merge(true, defadapter, adapter)
 
   const api = {}
-  const methods = adapter.methods
 
   // Create configuration instance from definition.
-  const configure = require('./configurator.js')(core, adapter)
+  const configure = configurator(core, adapter)
   const configuration = configure(definition, adapter)
 
   const define = method => {
     return options => {
-      if (methods[method]) {
-        methods[method](configuration, options)
+      if (adapter.methods[method]) {
+        adapter.methods[method](configuration, options)
       } else {
         nosupport(method)
       }
