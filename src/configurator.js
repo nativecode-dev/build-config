@@ -54,7 +54,7 @@ module.exports = (core, adapter) => {
       return conf
     }
 
-    const definitions = Object.keys(config).filter(key => ['common', 'options'].indexOf(key) < 0)
+    const definitions = Object.keys(config).filter(key => ['common', 'options', 'plugins'].indexOf(key) < 0)
     definitions.map(key => task(key, config[key]))
     definitions.map(key => watch(key, config[key]))
 
