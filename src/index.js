@@ -1,5 +1,4 @@
 const core = require('./core.js')
-const configure = require('./configurator.js')(core)
 
 const defadapter = {
   configfile: undefined,
@@ -17,6 +16,7 @@ module.exports = (definition, adapter) => {
   const methods = adapter.methods
 
   // Create configuration instance from definition.
+  const configure = require('./configurator.js')(core, adapter)
   const configuration = configure(definition, adapter)
 
   const define = method => {

@@ -8,10 +8,11 @@ const core = {
     return core.resolve(json)
   },
   dir: path => core.path.join(process.cwd(), path),
-  exists: path => {
+  exists: (path, cwd) => {
+    cwd = cwd || process.cwd()
     if (!path) return false
     try {
-      return core.fs.statFileSync(path)
+      return core.fs.statSync(core.path.join(cwd, path))
     } catch (err) {
       return false
     }
@@ -40,6 +41,9 @@ const core = {
   },
   merge: require('merge'),
   path: require('path'),
+  require: value => {
+    if (!value) throw new Error('Required value was not provided')
+  },
   resolve: (hash, root) => {
     root = root || hash
     Object.keys(hash).map(key => {

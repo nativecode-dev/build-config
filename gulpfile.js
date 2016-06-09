@@ -38,5 +38,6 @@ gulp.task('default', ['test'])
 
 gulp.task('test', ['build'], () => {
   return gulp.src('test/**/*.js', {read: false})
+    .pipe(plugin.debug({title: 'tests:'}))
     .pipe(plugin.mocha({reporter: 'nyan'}))
 })

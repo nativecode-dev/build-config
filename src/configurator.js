@@ -1,15 +1,10 @@
 module.exports = (core, adapter) => {
-  const loadconf = filename => {
-    if (process.env.debug) {
-      console.log('Reading configuration %s.', filename)
-    }
-    return core.config(filename)
-  }
-  const coreconfig = loadconf(core.path.join(__dirname, 'defaults.json'))
+  core.require(adapter)
+  const loader = require('./loader.js')(core)
 
   return config => {
-    const userconfig = adapter && core.exists(adapter.configfile) ? loadconf(adapter.configfile) : {}
-    const defaults = core.merge({debug: !!process.env.debug}, coreconfig, userconfig)
+    core.require(config)
+    const defaults = core.merge({debug: !!process.env.debug}, loader(adapter.configfile))
 
     const common = core.merge({}, defaults.common, config.common)
     const options = core.merge({}, defaults.options, config.options)
