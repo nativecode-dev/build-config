@@ -3,7 +3,7 @@ module.exports = (core, adapter) => {
 
   return config => {
     const userconfig = adapter && core.exists(adapter.configfile) ? core.config(adapter.configfile) : {}
-    const defaults = core.merge({}, coreconfig, userconfig)
+    const defaults = core.merge({}, coreconfig, userconfig, { debug: !!process.env.debug })
 
     const common = core.merge({}, defaults.common, config.common)
     const options = core.merge({}, defaults.options, config.options)
@@ -28,6 +28,7 @@ module.exports = (core, adapter) => {
     }
 
     const destination = dest => {
+      if (dest === false) return null
       if (!dest) return common.dest
       if (core.is.func(dest)) return dest()
       if (core.is.string(dest) && common.desinations[dest]) return common.destinations[dest]

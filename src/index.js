@@ -2,6 +2,7 @@ const core = require('./core.js')
 const configure = require('./configurator.js')(core)
 
 const defadapter = {
+  core: core,
   configfile: undefined,
   methods: {}
 }
@@ -22,7 +23,7 @@ module.exports = (definition, adapter) => {
   const define = method => {
     return options => {
       if (methods[method]) {
-        methods[method](configuration, options)
+        methods[method](configuration, core, options)
       } else {
         nosupport(method)
       }
@@ -30,7 +31,6 @@ module.exports = (definition, adapter) => {
     }
   }
 
-  api.$ = core
   api.build = define('build')
   api.clean = define('clean')
   api.deploy = define('deploy')

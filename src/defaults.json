@@ -1,6 +1,7 @@
 {
   "common": {
     "artifacts": "artifacts",
+    "debug": false,
     "dest": "dist",
     "key": {
       "private": null,
