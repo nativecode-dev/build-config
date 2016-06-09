@@ -20,7 +20,7 @@ const core = {
     arrays: (key, hash) => core.is.array(hash[key]),
     functions: (key, hash) => core.is.func(hash[key]),
     objects: (key, hash) => core.is.object(hash[key]),
-    strings: (key, hash) => core.is.string(hash[key]),
+    strings: (key, hash) => core.is.string(hash[key])
   },
   fs: require('fs'),
   is: {
