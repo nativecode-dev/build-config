@@ -1,0 +1,70 @@
+{
+  "common": {
+    "artifacts": "artifacts",
+    "dest": "dist",
+    "key": {
+      "private": null,
+      "public": null
+    },
+    "sources": {
+      "css": [
+        "src/**/*.css"
+      ],
+      "html": [
+        "src/**/*.html"
+      ],
+      "less": [
+        "src/**/*.less"
+      ],
+      "javascript": [
+        "src/**/*.js"
+      ],
+      "js": [
+        "src/**/*.js"
+      ],
+      "sass": [
+        "src/**/*.sass",
+        "src/**/*.scss"
+      ],
+      "ts": [
+        "src/**.*.ts"
+      ],
+      "typescript": [
+        "src/**.*.ts"
+      ]
+    }
+  },
+  "options": {
+    "default": true,
+    "deploy": {},
+    "overrides": {
+      "names": {
+        "build": "build",
+        "clean": "clean",
+        "deploy": "deploy",
+        "package": "package",
+        "watch": "watch"
+      }
+    },
+    "package": {
+      "shrinkwrap": {
+        "src": [
+          "bower.json",
+          "package.json"
+        ]
+      }
+    },
+    "watch": {
+      "configurations": {
+        "src": [
+          "bower.json",
+          "gulpfile.js",
+          "gulpfile.json",
+          "package.json"
+        ]
+      },
+      "debounce": 500,
+      "interval": 100
+    }
+  }
+}

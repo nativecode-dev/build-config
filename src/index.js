@@ -1,12 +1,23 @@
 const core = require('./core.js')
 const configurator = require('./configurator.js')(core)
-const nosupport = method => {
-  throw new Error('Method ' + method + 'not supported.')
+
+const defadapter = {
+  configfile: undefined,
+  methods: {}
 }
 
-module.exports = (definition, methods) => {
+const nosupport = method => {
+  throw new Error('Method ' + method + ' not supported.')
+}
+
+module.exports = (definition, adapter) => {
+  adapter = core.merge({}, defadapter, adapter)
+
   const api = {}
-  const configuration = configurator(definition)
+  const methods = adapter.methods
+
+  // Create configuration instance from definition.
+  const configuration = configurator(definition, adapter)
 
   const define = method => {
     return options => {
@@ -19,6 +30,7 @@ module.exports = (definition, methods) => {
     }
   }
 
+  api.$ = core
   api.build = define('build')
   api.clean = define('clean')
   api.deploy = define('deploy')

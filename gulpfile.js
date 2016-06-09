@@ -8,17 +8,32 @@ gulp.bt.build({
     build: stream => stream
       .pipe(plugin.babel($.babel))
       .pipe(gulp.dest('dist')),
-    src: ['src/**/*.js']
+    src: ['src/**/*.js'],
+    tasks: ['build:jslint']
+  },
+  jslint: {
+    build: stream => stream
+      .pipe(plugin.standard())
+      .pipe(plugin.standard.reporter('stylish', { breakOnError: false })),
+    src: ['src/**/*.js'],
+    tasks: ['build:json']
+  },
+  json: {
+    build: stream => stream
+      .pipe(gulp.dest('dist')),
+    src: ['src/**/*.json']
   }
 })
 
 gulp.bt.reload('test').when({
   'src/**/*.js': ['test'],
+  'src/**/*.json': ['test'],
   'test/**/*.js': ['test']
 })
 
 gulp.bt.publish({ tasks: ['test']}).npm()
 
+gulp.task('clean', () => gulp.src($.clean.src).pipe(plugin.clean()))
 gulp.task('default', ['test'])
 
 gulp.task('test', ['build'], () => {

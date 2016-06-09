@@ -16,7 +16,6 @@ describe('when using the configurator', () => {
 
     it('should create html configuration', () => {
       const configuration = configurator(definition)
-      console.log(configuration)
       expect(configuration.builds.html.source).eql(configuration.common.sources.html)
     })
 

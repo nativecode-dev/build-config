@@ -12,7 +12,9 @@ describe('when writing plugin methods', () => {
   }
 
   describe('should be able to override build', () => {
-    const api = configurator(definition, { build: configuration => true })
+    const api = configurator(definition, {
+      methods: {build: configuration => true }
+    })
 
     it('should not throw not supported error', () => expect(api.build).to.not.throw(Error))
     it('should throw not supported on method not overridden', () => expect(api.clean).to.throw(Error))

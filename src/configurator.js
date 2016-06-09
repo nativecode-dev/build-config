@@ -1,88 +1,57 @@
-const defaults = {
-  common: {
-    dest: 'dist',
-    key: {
-      private: undefined,
-      public: undefined
-    },
-    sources: {
-      css: ['src/**/*.css'],
-      html: ['src/**/*.html'],
-      less: ['src/**/*.less'],
-      javascript: ['src/**/*.js'],
-      js: ['src/**/*.js'],
-      sass: ['src/**/*.sass', 'src/**/*.scss'],
-      ts: ['src/**.*.ts'],
-      typescript: ['src/**.*.ts']
-    }
-  },
-  options: {
-    default: true,
-    deploy: {},
-    overrides: {
-      names: {
-        build: 'build',
-        clean: 'clean',
-        deploy: 'deploy',
-        package: 'package',
-        watch: 'watch'
-      }
-    },
-    package: {
-      shrinkwrap: {
-        enabled: true,
-        src: ['bower.json', 'package.json']
-      }
-    },
-    watch: {
-      configurations: {
-        enabled: true,
-        src: ['bower.json', 'gulpfile.js', 'gulpfile.json', 'package.json']
-      }
-    }
-  }
-}
+module.exports = (core, adapter) => {
+  const coreconfig = core.config(core.path.join(__dirname, 'defaults.json'))
 
-module.exports = core => {
   return config => {
+    const userconfig = adapter && core.exists(adapter.configfile) ? core.config(adapter.configfile) : {}
+    const defaults = core.merge({}, coreconfig, userconfig)
+
     const common = core.merge({}, defaults.common, config.common)
     const options = core.merge({}, defaults.options, config.options)
     const names = core.merge({}, defaults.options.overrides.names, options.overrides.names)
 
     const configuration = {
-      builds: {},
       common: common,
       options: options,
-      names: names,
-      sites: {},
+
+      builds: {},
+      deployments: {},
+      packages: {},
       watches: {}
+    }
+
+    const destination = dest => {
+      if (!dest) return common.dest
+      if (typeof dest === 'function') return dest()
+      if (typeof dest === 'string' && common.desinations[dest]) return common.destinations[dest]
+      return dest
     }
 
     const source = src => {
       if (!src) return []
-      if (typeof src === 'array' && src.length) return src
       if (typeof src === 'function') return src()
       if (typeof src === 'string' && common.sources[src]) return common.sources[src]
-      return undefined
+      return src
     }
 
     const task = (key, value) => {
       const name = core.taskname(names.build, key)
-      return configuration.builds[key] = {
+      const conf = configuration.builds[key] = {
         build: value.build || value,
         name: name,
         source: core.array(source(key) || source(value.src)),
-        target: value.dest || common.dest
+        target: destination(value.dest)
       }
+      return conf
     }
 
     const watch = (key, value) => {
       const name = core.taskname(names.watch, key)
-      return configuration.watches[key] = {
+      const conf = configuration.watches[key] = {
         name: name,
         source: core.array(source(key) || source(value.src)),
-        target: value.dest || common.dest
+        target: destination(value.dest)
       }
+      return conf
     }
 
     const definitions = Object.keys(config).filter(key => ['common', 'options'].indexOf(key) < 0)
