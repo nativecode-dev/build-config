@@ -19,10 +19,10 @@ module.exports = (core, adapter) => {
       watches: {}
     }
 
-    const dependencies = value => {
-      value = core.array(value)
-      return Object.keys(value).map(index => {
-        const key = value[index]
+    const dependencies = tasks => {
+      tasks = core.array(tasks)
+      return Object.keys(tasks).map(index => {
+        const key = tasks[index]
         return config[key] ? core.taskname(names.build, key) : key
       })
     }

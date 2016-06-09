@@ -51,5 +51,10 @@ describe('when using the configurator', () => {
       const configuration = configurator(definition)
       expect(configuration.builds.js.dependencies).eql(['build:jslint'])
     })
+
+    it('should ensure dependencies is empty', () => {
+      const configuration = configurator(definition)
+      expect(configuration.builds.jslint.dependencies).eql([])
+    })
   })
 })

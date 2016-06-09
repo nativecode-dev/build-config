@@ -1,7 +1,7 @@
 const render = require('mustache').render
 
 const core = {
-  array: value => value instanceof Array ? value : [value],
+  array: value => core.is.array(value) ? value : value ? [value] : [],
   buffer: filename => new Buffer(core.stream(filename)),
   config: filename => {
     const json = core.json(filename)
