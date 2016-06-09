@@ -35,6 +35,7 @@ describe('when using the configurator', () => {
     it('should create js watcher', () => {
       const configuration = configurator(definition)
       expect(configuration.watches.js.source).eql(configuration.common.sources.js)
+      expect(configuration.watches.js.dependencies).eql(['build:js'])
     })
 
     it('should create jslint configuration', () => {

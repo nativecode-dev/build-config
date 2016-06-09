@@ -54,11 +54,10 @@ module.exports = (core, adapter) => {
     }
 
     const watch = (key, value) => {
-      const name = core.taskname(names.watch, key)
       const conf = configuration.watches[key] = {
-        name: name,
-        source: core.array(source(key) || source(value.src)),
-        target: destination(value.dest)
+        dependencies: [core.taskname(names.build, key)],
+        name: core.taskname(names.watch, key),
+        source: core.array(source(key) || source(value.src))
       }
       return conf
     }
