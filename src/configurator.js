@@ -19,24 +19,33 @@ module.exports = (core, adapter) => {
       watches: {}
     }
 
+    const dependencies = value => {
+      value = core.array(value)
+      return Object.keys(value).map(index => {
+        const key = value[index]
+        return config[key] ? core.taskname(names.build, key) : key
+      })
+    }
+
     const destination = dest => {
       if (!dest) return common.dest
-      if (typeof dest === 'function') return dest()
-      if (typeof dest === 'string' && common.desinations[dest]) return common.destinations[dest]
+      if (core.is.func(dest)) return dest()
+      if (core.is.string(dest) && common.desinations[dest]) return common.destinations[dest]
       return dest
     }
 
     const source = src => {
       if (!src) return []
-      if (typeof src === 'function') return src()
-      if (typeof src === 'string' && common.sources[src]) return common.sources[src]
-      return src
+      if (core.is.func(src)) return src()
+      if (core.is.string(src) && common.sources[src]) return common.sources[src]
+      return Object.keys(src).map(key => source(src[key]))
     }
 
     const task = (key, value) => {
       const name = core.taskname(names.build, key)
       const conf = configuration.builds[key] = {
         build: value.build || value,
+        dependencies: dependencies(value.tasks),
         name: name,
         source: core.array(source(key) || source(value.src)),
         target: destination(value.dest)

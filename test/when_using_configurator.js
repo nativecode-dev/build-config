@@ -46,5 +46,10 @@ describe('when using the configurator', () => {
       const configuration = configurator(definition)
       expect(configuration.watches.jslint.source).eql(configuration.common.sources.js)
     })
+
+    it('should resolve named dependencies', () => {
+      const configuration = configurator(definition)
+      expect(configuration.builds.js.dependencies).eql(['build:jslint'])
+    })
   })
 })
