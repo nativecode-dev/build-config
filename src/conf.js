@@ -3,7 +3,7 @@ module.exports = core => {
     cwd = cwd || process.cwd()
     filename = core.path.join(cwd, filename)
     if (process.env.debug) {
-      console.log('Reading configuration %s.', filename)
+      core.debug('Reading configuration %s.', filename)
     }
     return core.config(filename)
   }

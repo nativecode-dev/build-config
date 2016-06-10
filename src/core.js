@@ -5,6 +5,7 @@ const core = {
     const json = core.json(filename)
     return core.resolve(json)
   },
+  debug: function () { console.log.apply(console, [].slice.call(arguments)) },
   dir: path => core.path.join(process.cwd(), path),
   exists: (path, cwd) => {
     cwd = cwd || process.cwd()
