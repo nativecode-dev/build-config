@@ -60,7 +60,7 @@ describe('when using the configurator', () => {
 
     it('should have empty secrets', () => {
       const configuration = configurator(definition)
-      expect(configuration.options.secrets).eql({})
+      expect(configuration.options.secrets).is.not.undefined
     })
   })
 })

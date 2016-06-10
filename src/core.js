@@ -59,18 +59,20 @@ const core = {
   },
   secrets: filename => {
     filename = filename || '.secrets.json'
-    const home = core.path.join(core.os.homedir(), filename)
-    const local = core.path.join(process.cwd(), filename)
-    const parent = core.path.resolve(core.path.join(process.cwd(), '../' + filename))
-    if (core.exists(local)) {
-      core.debug('Found %s in %s', filename, local)
-      return core.json(local)
-    } else if (core.exists(home)) {
+    const home = core.os.homedir()
+    const local = process.cwd()
+    const parent = core.path.resolve(process.cwd(), '../')
+    console.log(home, local, parent)
+
+    if (core.exists(filename, home)) {
       core.debug('Found %s in %s', filename, home)
-      return core.json(home)
-    } else if (core.exists(parent)) {
+      return core.json(core.path.join(home, filename))
+    } else if (core.exists(filename, local)) {
+      core.debug('Found %s in %s', filename, local)
+      return core.json(core.path.join(local, filename))
+    } else if (core.exists(filename, parent)) {
       core.debug('Found %s in %s', filename, parent)
-      return core.json(parent)
+      return core.json(core.path.join(parent, filename))
     }
     core.debug('Failed to find %s anywhere.', filename)
     return {}
