@@ -30,12 +30,10 @@ module.exports = (definition, adapter) => {
     }
   }
 
-  api.build = define('build')
-  api.clean = define('clean')
-  api.deploy = define('deploy')
-  api.package = define('package')
-  api.publish = define('publish')
-  api.watch = define('watch')
+  Object.keys(configuration.options.overrides.names)
+    .map(name => {
+      api[name] = define(name)
+    })
 
   return api
 }

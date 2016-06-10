@@ -65,6 +65,8 @@
         "clean": "clean",
         "deploy": "deploy",
         "package": "package",
+        "publish": "publish",
+        "version": "version",
         "watch": "watch"
       }
     },
