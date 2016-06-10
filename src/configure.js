@@ -8,7 +8,7 @@ module.exports = (core, adapter) => {
 
     const common = core.merge(true, defaults.common, config.common)
     const options = core.merge(true, defaults.options, config.options)
-    const names = core.merge(true, defaults.options.overrides.names, options.overrides.names)
+    const names = defaults.common.names
 
     const configuration = {
       common: common,

@@ -11,6 +11,15 @@
       "private": null,
       "public": null
     },
+    "names": {
+      "build": "build",
+      "clean": "clean",
+      "deploy": "deploy",
+      "package": "package",
+      "publish": "publish",
+      "version": "version",
+      "watch": "watch"
+    },
     "sources": {
       "css": "src/**/*.css",
       "csslint": "src/**/*.css",
@@ -39,22 +48,11 @@
       "default": true
     },
     "deploy": {},
-    "overrides": {
-      "names": {
-        "build": "build",
-        "clean": "clean",
-        "deploy": "deploy",
-        "package": "package",
-        "publish": "publish",
-        "version": "version",
-        "watch": "watch"
-      }
-    },
     "package": {
       "dest": ":{{common.dest}}",
       "format": "{{name}}.{{version}}.zip",
       "src": ":{{common.dest}}/**/*",
-      "tasks": ":{{options.overrides.names.build}}"
+      "tasks": ":{{common.names.build}}"
     },
     "publish": {
       "src": [

@@ -37,10 +37,12 @@ module.exports = (definition, adapter) => {
     }
   }
 
-  Object.keys(configuration.options.overrides.names)
-    .map(name => {
+  const methods = core.merge(true, configuration.common.names, adapter.methods)
+  Object.keys(methods).map(name => {
+    if (!api[name]) {
       api[name] = define(name)
-    })
+    }
+  })
 
   return api
 }
