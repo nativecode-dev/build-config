@@ -62,7 +62,6 @@ const core = {
     const home = core.os.homedir()
     const local = process.cwd()
     const parent = core.path.resolve(process.cwd(), '../')
-    console.log(home, local, parent)
 
     if (core.exists(filename, home)) {
       core.debug('Found %s in %s', filename, home)
