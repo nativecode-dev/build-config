@@ -9,6 +9,7 @@ module.exports = core => {
   }
 
   const coreconfig = load('defaults.json', __dirname)
+  coreconfig.options.secrets = core.secrets()
 
   return filename => {
     const userconfig = filename && core.exists(filename) ? load(filename) : {}

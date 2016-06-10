@@ -57,5 +57,10 @@ describe('when using the configurator', () => {
       const configuration = configurator(definition)
       expect(configuration.builds.jslint.dependencies).eql([])
     })
+
+    it('should have empty secrets', () => {
+      const configuration = configurator(definition)
+      expect(configuration.options.secrets).eql({})
+    })
   })
 })

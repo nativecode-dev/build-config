@@ -39,6 +39,7 @@ const core = {
     })
   },
   merge: require('merge').recursive,
+  os: require('os'),
   path: require('path'),
   render: require('mustache').render,
   require: value => {
@@ -55,6 +56,24 @@ const core = {
       }
     })
     return root
+  },
+  secrets: filename => {
+    filename = filename || '.secrets.json'
+    const home = core.path.join(core.os.homedir(), filename)
+    const local = core.path.join(process.cwd(), filename)
+    const parent = core.path.resolve(core.path.join(process.cwd(), '../' + filename))
+    if (core.exists(local)) {
+      core.debug('Found %s in %s', filename, local)
+      return core.json(local)
+    } else if (core.exists(home)) {
+      core.debug('Found %s in %s', filename, home)
+      return core.json(home)
+    } else if (core.exists(parent)) {
+      core.debug('Found %s in %s', filename, parent)
+      return core.json(parent)
+    }
+    core.debug('Failed to find %s anywhere.', filename)
+    return {}
   },
   stream: filename => core.fs.readFileSync(filename),
   taskname: (prefix, name) => [prefix, name].join(':'),
