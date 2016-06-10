@@ -48,7 +48,18 @@ const core = {
   path: require('path'),
   render: require('mustache').render,
   require: value => {
-    if (!value) throw new Error('Required value was not provided')
+    if (!value) throw new Error('Required value was not provided.')
+  },
+  quote: (value, quote, separator) => {
+    quote = quote || "'"
+    separator = separator || ', '
+    if (core.is.array(value)) {
+      return value.map(item => core.quote(item)).join(separator)
+    }
+    if (core.is.string(value)) {
+      return quote + value + quote
+    }
+    return value
   },
   resolve: (hash, root) => {
     root = root || hash
@@ -61,25 +72,6 @@ const core = {
       }
     })
     return root
-  },
-  secrets: filename => {
-    filename = filename || '.secrets.json'
-    const home = core.os.homedir()
-    const local = process.cwd()
-    const parent = core.path.resolve(process.cwd(), '../')
-
-    if (core.exists(filename, home)) {
-      core.debug('Found %s in %s', filename, home)
-      return core.json(core.path.join(home, filename))
-    } else if (core.exists(filename, local)) {
-      core.debug('Found %s in %s', filename, local)
-      return core.json(core.path.join(local, filename))
-    } else if (core.exists(filename, parent)) {
-      core.debug('Found %s in %s', filename, parent)
-      return core.json(core.path.join(parent, filename))
-    }
-    core.debug('Failed to find %s anywhere.', filename)
-    return {}
   },
   stream: filename => core.fs.readFileSync(filename),
   taskname: (prefix, name) => [prefix, name].join(':'),

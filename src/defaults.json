@@ -1,6 +1,10 @@
 {
   "common": {
     "artifacts": null,
+    "credentials": {
+      "password": null,
+      "username": null
+    },
     "debug": false,
     "dest": "dist",
     "key": {
@@ -34,10 +38,7 @@
     "build": {
       "default": true
     },
-    "deploy": {
-      "source": [],
-      "target": []
-    },
+    "deploy": {},
     "overrides": {
       "names": {
         "build": "build",
@@ -60,7 +61,22 @@
         "package.json"
       ],
       "npm": {
+        "credentials": ":{{common.credentials}}",
         "registry": "https://registry.npmjs.org"
+      }
+    },
+    "sites": {
+      "ftp": {
+        "credentials": ":{{common.credentials}}",
+        "host": null,
+        "key": ":{{common.key}}",
+        "secure": false
+      },
+      "ssh": {
+        "credentials": ":{{common.credentials}}",
+        "host": null,
+        "key": ":{{common.key}}",
+        "secure": false
       }
     },
     "watch": {

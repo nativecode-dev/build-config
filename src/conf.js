@@ -8,6 +8,26 @@ module.exports = core => {
     return core.config(filename)
   }
 
+  const secrets = filename => {
+    filename = filename || '.secrets.json'
+    const home = core.os.homedir()
+    const local = process.cwd()
+    const parent = core.path.resolve(process.cwd(), '../')
+
+    if (core.exists(filename, home)) {
+      core.debug('Found %s in %s', filename, home)
+      return core.json(core.path.join(home, filename))
+    } else if (core.exists(filename, local)) {
+      core.debug('Found %s in %s', filename, local)
+      return core.json(core.path.join(local, filename))
+    } else if (core.exists(filename, parent)) {
+      core.debug('Found %s in %s', filename, parent)
+      return core.json(core.path.join(parent, filename))
+    }
+    core.debug('Failed to find %s anywhere.', filename)
+    return {}
+  }
+
   // Loads the default configuration so we have sane defaults.
   const coreconfig = load('defaults.json', __dirname)
 
@@ -18,7 +38,7 @@ module.exports = core => {
   })
 
   // Apply secrets to the default configuration.
-  coreconfig.options.secrets = core.secrets()
+  coreconfig.options.secrets = secrets()
 
   return filename => {
     const userconfig = filename && core.exists(filename) ? load(filename) : {}

@@ -36,7 +36,7 @@ gulp.bt.publish({ tasks: ['test']}).npm()
 gulp.task('clean', () => gulp.src($.clean.src).pipe(plugin.clean()))
 gulp.task('default', ['test'])
 
-gulp.task('test', ['build'], () => {
+gulp.task('test', ['build:js'], () => {
   return gulp.src('test/**/*.js', {read: false})
     .pipe(plugin.debug({title: 'tests:'}))
     .pipe(plugin.mocha({reporter: 'nyan'}))
