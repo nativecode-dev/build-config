@@ -71,24 +71,10 @@
     "package": {
       "dest": ":{{common.dest}}",
       "format": "{{name}}.{{version}}.zip",
-      "shrinkwrap": {
-        "src": [
-          "bower.json",
-          "package.json"
-        ]
-      }
+      "src": ":{{common.dest}}",
+      "tasks": ":{{options.overrides.names.build}}"
     },
-    "publish": {
-      "git": {
-        "tag": true,
-        "version": true
-      },
-      "npm": {
-        "password": null,
-        "registry": "https://registry.npmjs.org",
-        "username": null
-      }
-    },
+    "publish": {},
     "watch": {
       "configurations": {
         "src": [
