@@ -1,10 +1,11 @@
 const core = {
-  array: value => core.is.array(value) ? value : value ? [value] : [],
+  array: value => core.is.array(value) ? value : core.defined(value) ? [value] : [],
   buffer: filename => new Buffer(core.stream(filename)),
   config: filename => {
     const json = core.json(filename)
     return core.resolve(json)
   },
+  defined: value => value !== null && value !== undefined && value !== '' && (value && value.length),
   debug: function () {
     if (process.env.debug) {
       console.log.apply(console, [].slice.call(arguments))

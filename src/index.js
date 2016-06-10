@@ -21,7 +21,15 @@ module.exports = (definition, adapter) => {
   const define = method => {
     return options => {
       if (adapter.methods[method]) {
-        adapter.methods[method](configuration, options)
+        const results = adapter.methods[method](configuration, options)
+        const dependencies = core.array(results)
+
+        dependencies.map(index => {
+          const name = dependencies[index]
+          if (!adapter[name] || !core.is.func(adapter[name])) {
+            throw new Error('Dependency ' + name + ' required but was not enabled.')
+          }
+        })
       } else {
         nosupport(method)
       }
