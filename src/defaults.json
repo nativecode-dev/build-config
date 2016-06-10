@@ -52,8 +52,13 @@
     }
   },
   "options": {
-    "default": true,
-    "deploy": {},
+    "build": {
+      "default": true
+    },
+    "deploy": {
+      "source": [],
+      "target": []
+    },
     "overrides": {
       "names": {
         "build": "build",
@@ -64,11 +69,24 @@
       }
     },
     "package": {
+      "dest": ":{{common.dest}}",
+      "format": "{{name}}.{{version}}.zip",
       "shrinkwrap": {
         "src": [
           "bower.json",
           "package.json"
         ]
+      }
+    },
+    "publish": {
+      "git": {
+        "tag": true,
+        "version": true
+      },
+      "npm": {
+        "password": null,
+        "registry": "https://registry.npmjs.org",
+        "username": null
       }
     },
     "watch": {
