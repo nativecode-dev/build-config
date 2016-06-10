@@ -15,8 +15,6 @@ module.exports = (core, adapter) => {
       options: options,
 
       builds: {},
-      deployments: {},
-      packages: {},
       watches: {}
     }
 

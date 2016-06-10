@@ -8,30 +8,15 @@
       "public": null
     },
     "sources": {
-      "css": [
-        "src/**/*.css"
-      ],
-      "csslint": [
-        "src/**/*.css"
-      ],
-      "html": [
-        "src/**/*.html"
-      ],
-      "less": [
-        "src/**/*.less"
-      ],
-      "lesslint": [
-        "src/**/*.less"
-      ],
-      "javascript": [
-        "src/**/*.js"
-      ],
-      "js": [
-        "src/**/*.js"
-      ],
-      "jslint": [
-        "src/**/*.js"
-      ],
+      "css": "src/**/*.css",
+      "csslint": "src/**/*.css",
+      "html": "src/**/*.html",
+      "less": "src/**/*.less",
+      "lesslint": "src/**/*.less",
+      "javascript": "src/**/*.js",
+      "js": "src/**/*.js",
+      "jslint": "src/**/*.js",
+      "php": "src/**/*.php",
       "sass": [
         "src/**/*.sass",
         "src/**/*.scss"
@@ -40,15 +25,9 @@
         "src/**/*.sass",
         "src/**/*.scss"
       ],
-      "ts": [
-        "src/**.*.ts"
-      ],
-      "tslint": [
-        "src/**.*.ts"
-      ],
-      "typescript": [
-        "src/**.*.ts"
-      ]
+      "ts": "src/**.*.ts",
+      "tslint": "src/**.*.ts",
+      "typescript": "src/**.*.ts"
     }
   },
   "options": {
