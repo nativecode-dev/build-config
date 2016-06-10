@@ -71,10 +71,17 @@
     "package": {
       "dest": ":{{common.dest}}",
       "format": "{{name}}.{{version}}.zip",
-      "src": ":{{common.dest}}",
+      "src": ":{{common.dest}}/**/*",
       "tasks": ":{{options.overrides.names.build}}"
     },
-    "publish": {},
+    "publish": {
+      "src": [
+        "package.json"
+      ],
+      "npm": {
+        "registry": "https://registry.npmjs.org"
+      }
+    },
     "watch": {
       "configurations": {
         "src": [
@@ -87,5 +94,6 @@
       "debounce": 500,
       "interval": 100
     }
-  }
+  },
+  "plugins": {}
 }
