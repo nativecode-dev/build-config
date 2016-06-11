@@ -11,6 +11,9 @@
       "private": null,
       "public": null
     },
+    "main": [
+      "dist/index.js"
+    ],
     "names": {
       "build": "build",
       "clean": "clean",
@@ -20,27 +23,28 @@
       "version": "version",
       "watch": "watch"
     },
+    "source": "src",
     "sources": {
-      "css": "src/**/*.css",
-      "csslint": "src/**/*.css",
-      "html": "src/**/*.html",
-      "less": "src/**/*.less",
-      "lesslint": "src/**/*.less",
-      "javascript": "src/**/*.js",
-      "js": "src/**/*.js",
-      "jslint": "src/**/*.js",
-      "php": "src/**/*.php",
+      "css": ":{{common.source}}/**/*.css",
+      "csslint": ":{{common.source}}/**/*.css",
+      "html": ":{{common.source}}/**/*.html",
+      "less": ":{{common.source}}/**/*.less",
+      "lesslint": ":{{common.source}}/**/*.less",
+      "javascript": ":{{common.source}}/**/*.js",
+      "js": ":{{common.source}}/**/*.js",
+      "jslint": ":{{common.source}}/**/*.js",
+      "php": ":{{common.source}}/**/*.php",
       "sass": [
-        "src/**/*.sass",
-        "src/**/*.scss"
+        ":{{common.source}}/**/*.sass",
+        ":{{common.source}}/**/*.scss"
       ],
       "sasslint": [
-        "src/**/*.sass",
-        "src/**/*.scss"
+        ":{{common.source}}/**/*.sass",
+        ":{{common.source}}/**/*.scss"
       ],
-      "ts": "src/**.*.ts",
-      "tslint": "src/**.*.ts",
-      "typescript": "src/**.*.ts"
+      "ts": ":{{common.source}}/**.*.ts",
+      "tslint": ":{{common.source}}/**.*.ts",
+      "typescript": ":{{common.source}}/**.*.ts"
     }
   },
   "options": {
