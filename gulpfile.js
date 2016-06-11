@@ -3,6 +3,8 @@ const plugin = require('gulp-load-plugins')()
 
 const $ = gulp.bt.config
 
+plugin.teamcityReporter.wireTaskEvents()
+
 gulp.bt.build({
   js: {
     build: stream => stream
