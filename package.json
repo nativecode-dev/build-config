@@ -32,7 +32,8 @@
     "gulp-teamcity-reporter": "0.0.2",
     "gulp-util": "^3.0.7",
     "gulp-zip": "^3.2.0",
-    "mocha": "^2.5.3"
+    "mocha": "^2.5.3",
+    "mocha-teamcity-reporter": "^1.0.0"
   },
   "description": "Generic build definitions.",
   "homepage": "https://github.com/nativecode-dev/build-config#readme",

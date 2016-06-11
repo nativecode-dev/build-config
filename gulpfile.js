@@ -41,5 +41,5 @@ gulp.task('default', ['test'])
 gulp.task('test', ['build:js'], () => {
   return gulp.src('test/**/*.js', {read: false})
     .pipe(plugin.debug({title: 'tests:'}))
-    .pipe(plugin.mocha({reporter: 'nyan'}))
+    .pipe(plugin.mocha({reporter: process.env['TEAMCITY_AGENT_NAME'] ? 'mocha-teamcity-reporter' : 'nyan'}))
 })
