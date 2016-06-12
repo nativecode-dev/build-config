@@ -30,7 +30,7 @@ module.exports = (core, adapter) => {
       if (dest === false) return null
       if (!dest) return common.dest
       if (core.is.func(dest)) return dest()
-      if (core.is.string(dest)) return common.desinations[dest] ? common.destinations[dest] : dest
+      if (core.is.string(dest)) return common.destinations[dest] ? common.destinations[dest] : dest
       if (core.is.array(dest)) return dest[0]
       return dest
     }
