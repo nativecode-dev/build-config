@@ -31,6 +31,7 @@ module.exports = (core, adapter) => {
       if (!dest) return common.dest
       if (core.is.func(dest)) return dest()
       if (core.is.string(dest) && common.desinations[dest]) return common.destinations[dest]
+      if (core.is.array(dest)) return dest[0]
       return dest
     }
 
@@ -38,7 +39,8 @@ module.exports = (core, adapter) => {
       if (!src) return []
       if (core.is.func(src)) return src()
       if (core.is.string(src) && common.sources[src]) return common.sources[src]
-      return Object.keys(src).map(key => source(src[key]))
+      if (core.is.array(src)) return src
+      return core.array(src)
     }
 
     const task = (key, value) => {

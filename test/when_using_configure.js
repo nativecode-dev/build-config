@@ -14,7 +14,11 @@ describe('when using the configurator', () => {
         tasks: ['jslint']
       },
       jslint: stream => stream
-        .pipe(() => true)
+        .pipe(() => true),
+      markdown: {
+        build: stream => stream,
+        src: '**/*.md'
+      }
     }
 
     it('should create html configuration', () => {
