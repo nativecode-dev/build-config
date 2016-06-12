@@ -1,28 +1,31 @@
 module.exports = (core, adapter) => {
   core.require(adapter)
+  adapter.reserved = adapter.reserved || ['common', 'options', 'plugins']
+
   const loader = require('./conf.js')(core)
 
-  return config => {
-    core.require(config)
+  return definition => {
+    core.require(definition)
     const defaults = core.merge(true, loader(adapter.configfile), { common: { debug: !!process.env.debug } })
-
-    const common = core.merge(true, defaults.common, config.common)
-    const options = core.merge(true, defaults.options, config.options)
-    const names = defaults.common.names
-
     const configuration = {
-      common: common,
-      options: options,
-
       builds: {},
       watches: {}
     }
+
+    // Map reserved keywords array and merge as maps on the config.
+    Object.keys(adapter.reserved).map(index => {
+      const key = adapter.reserved[index]
+      configuration[key] = core.merge(true, defaults[key] || {}, definition[key] || {})
+    })
+
+    const common = configuration.common
+    const names = configuration.common.names
 
     const dependencies = tasks => {
       tasks = core.array(tasks)
       return Object.keys(tasks).map(index => {
         const key = tasks[index]
-        return config[key] ? core.taskname(names.build, key) : key
+        return definition[key] ? core.taskname(names.build, key) : key
       })
     }
 
@@ -35,12 +38,12 @@ module.exports = (core, adapter) => {
       return dest
     }
 
-    const source = src => {
+    const source = (src, defaultValue) => {
       if (!src) return []
       if (core.is.func(src)) return src()
       if (core.is.string(src) && common.sources[src]) return common.sources[src]
       if (core.is.array(src)) return src
-      return null
+      return defaultValue ? src : null
     }
 
     const task = (key, value) => {
@@ -49,7 +52,7 @@ module.exports = (core, adapter) => {
         build: value.build || value,
         dependencies: dependencies(value.tasks),
         name: name,
-        source: core.array(source(key) || source(value.src)),
+        source: core.array(source(key) || source(value.src, true)),
         target: destination(value.dest)
       }
       return conf
@@ -59,15 +62,14 @@ module.exports = (core, adapter) => {
       const conf = configuration.watches[key] = {
         dependencies: [core.taskname(names.build, key)],
         name: core.taskname(names.watch, key),
-        source: core.array(source(key) || source(value.src))
+        source: core.array(source(key) || source(value.src, true))
       }
       return conf
     }
 
-    const reserved = ['app', 'common', 'config', 'options', 'plugins'].concat(adapter.reserved || [])
-    const definitions = Object.keys(config).filter(key => reserved.indexOf(key) < 0)
-    definitions.map(key => task(key, config[key]))
-    definitions.map(key => watch(key, config[key]))
+    const definitions = Object.keys(definition).filter(key => adapter.reserved.indexOf(key) < 0)
+    definitions.map(key => task(key, definition[key]))
+    definitions.map(key => watch(key, definition[key]))
 
     return configuration
   }

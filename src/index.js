@@ -3,7 +3,8 @@ const configure = require('./configure.js')
 
 const defadapter = {
   configfile: undefined,
-  methods: {}
+  methods: {},
+  reserved: ['app', 'common', 'config', 'options', 'plugins']
 }
 
 const nosupport = method => {

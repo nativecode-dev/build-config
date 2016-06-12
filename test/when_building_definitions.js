@@ -10,7 +10,7 @@ describe('when converting', () => {
         any: {
           build: stream => stream,
           dest: 'dist',
-          src: ['**/*'],
+          src: '**/*',
           tasks: ['dependency']
         }
       }
