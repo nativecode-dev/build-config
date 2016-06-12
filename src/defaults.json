@@ -6,7 +6,10 @@
       "username": null
     },
     "debug": false,
-    "dest": "dist",
+    "destinations": {
+      "default": "dist"
+    },
+    "dest": ":{{{common.destinations.default}}}",
     "key": {
       "private": null,
       "public": null
