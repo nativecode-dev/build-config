@@ -40,8 +40,19 @@ module.exports = core => {
   // Apply secrets to the default configuration.
   coreconfig.options.secrets = secrets()
 
-  return filename => {
-    const userconfig = filename && core.exists(filename) ? load(filename) : {}
-    return core.merge({}, coreconfig, userconfig)
+  return (filenames, attach) => {
+    filenames = core.array(filenames)
+    var voltron = core.merge(true, {}, coreconfig)
+    Object.keys(filenames).map(index => {
+      const filename = filenames[index]
+      const userconfig = filename && core.exists(filename) ? load(filename) : {}
+      if (attach) {
+        const key = core.path.parse(filename).name
+        voltron[key] = userconfig
+      } else {
+        voltron = core.merge(true, voltron, userconfig)
+      }
+    })
+    return voltron
   }
 }
