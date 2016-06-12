@@ -38,9 +38,9 @@ module.exports = (core, adapter) => {
     const source = src => {
       if (!src) return []
       if (core.is.func(src)) return src()
-      if (core.is.string(src) && common.sources[src]) return common.sources[src]
+      if (core.is.string(src)) return core.array(common.sources[src] ? common.sources[src] : src)
       if (core.is.array(src)) return src
-      return core.array(src)
+      return src
     }
 
     const task = (key, value) => {
