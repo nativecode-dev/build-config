@@ -65,7 +65,7 @@ const core = {
     root = root || hash
     Object.keys(hash).map(key => {
       var value = hash[key]
-      if (all || (core.is.string(value) && value.indexOf(':') === 0)) {
+      if (core.is.string(value) && (all || value.indexOf(':') === 0)) {
         hash[key] = core.render(value, root).substring(1)
       } else if (core.is.array(value) || core.is.object(value)) {
         core.resolve(value, root, all)
