@@ -38,9 +38,9 @@ module.exports = (core, adapter) => {
     const source = src => {
       if (!src) return []
       if (core.is.func(src)) return src()
-      if (core.is.string(src)) return core.array(common.sources[src] ? common.sources[src] : src)
+      if (core.is.string(src) && common.sources[src]) return common.sources[src]
       if (core.is.array(src)) return src
-      return src
+      return null
     }
 
     const task = (key, value) => {
@@ -64,7 +64,8 @@ module.exports = (core, adapter) => {
       return conf
     }
 
-    const definitions = Object.keys(config).filter(key => ['common', 'options', 'plugins'].indexOf(key) < 0)
+    const reserved = ['app', 'common', 'config', 'options', 'plugins'].concat(adapter.reserved || [])
+    const definitions = Object.keys(config).filter(key => reserved.indexOf(key) < 0)
     definitions.map(key => task(key, config[key]))
     definitions.map(key => watch(key, config[key]))
 

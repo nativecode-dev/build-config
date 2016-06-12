@@ -75,7 +75,18 @@ const core = {
   },
   stream: filename => core.fs.readFileSync(filename),
   taskname: (prefix, name) => [prefix, name].join(':'),
-  text: filename => core.stream(filename).toString()
+  text: filename => core.stream(filename).toString(),
+  unqiue: value => {
+    const hash = {}
+    const results = []
+    Object.keys(value).map(key => {
+      if (!hash[key]) {
+        hash[key] = key
+        results.push(value[key])
+      }
+    })
+    return results
+  }
 }
 
 module.exports = core
