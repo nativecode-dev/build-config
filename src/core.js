@@ -55,7 +55,6 @@ const core = {
     const message = (args.length === 1)
       ? sprintf.apply(null, args[0])
       : sprintf.apply(null, args)
-    console.log(message)
     return message
   },
   render: require('mustache').render,
