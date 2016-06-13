@@ -5,7 +5,8 @@
   },
   "dependencies": {
     "merge": "^1.2.0",
-    "mustache": "^2.2.1"
+    "mustache": "^2.2.1",
+    "sprintf-js": "^1.0.3"
   },
   "devDependencies": {
     "babel": "^6.5.2",

@@ -1,3 +1,5 @@
+const sprintf = require('sprintf-js')
+
 const core = {
   array: value => core.is.array(value) ? value : core.defined(value) ? [value] : [],
   buffer: filename => new Buffer(core.stream(filename)),
@@ -46,6 +48,9 @@ const core = {
   merge: require('merge').recursive,
   os: require('os'),
   path: require('path'),
+  print: function () {
+    return sprintf(arguments)
+  },
   render: require('mustache').render,
   require: value => {
     if (!value) throw new Error('Required value was not provided.')
