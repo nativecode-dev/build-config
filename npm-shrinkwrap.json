@@ -1,6 +1,6 @@
 {
   "name": "build-config",
-  "version": "1.1.16",
+  "version": "1.1.17",
   "dependencies": {
     "merge": {
       "version": "1.2.0",
