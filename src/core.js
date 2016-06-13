@@ -1,6 +1,7 @@
-const sprintf = require('sprintf-js')
+const sprintf = require('sprintf-js').sprintf
 
 const core = {
+  args: args => Array.prototype.slice.call(args),
   array: value => core.is.array(value) ? value : core.defined(value) ? [value] : [],
   buffer: filename => new Buffer(core.stream(filename)),
   config: filename => {
@@ -10,7 +11,8 @@ const core = {
   defined: value => value !== null && value !== undefined && value !== '' && (value && value.length),
   debug: function () {
     if (process.env.debug) {
-      console.log.apply(console, [].slice.call(arguments))
+      const message = core.print.apply(null, core.args(arguments))
+      console.log(message)
     }
   },
   dir: path => core.path.join(process.cwd(), path),
@@ -49,7 +51,12 @@ const core = {
   os: require('os'),
   path: require('path'),
   print: function () {
-    return sprintf(arguments)
+    const args = core.args(arguments)
+    const message = (args.length === 1)
+      ? sprintf.apply(null, args[0])
+      : sprintf.apply(null, args)
+    console.log(message)
+    return message
   },
   render: require('mustache').render,
   require: value => {

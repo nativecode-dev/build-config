@@ -9,6 +9,10 @@
     "mustache": {
       "version": "2.2.1",
       "from": "mustache@>=2.2.1 <3.0.0"
+    },
+    "sprintf-js": {
+      "version": "1.0.3",
+      "from": "sprintf-js@*"
     }
   }
 }
