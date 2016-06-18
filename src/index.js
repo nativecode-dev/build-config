@@ -11,7 +11,7 @@ const nosupport = method => {
   throw new Error('Method ' + method + ' not supported.')
 }
 
-module.exports = (definition, adapter) => {
+const api = (definition, adapter) => {
   adapter = core.merge(true, defadapter, adapter)
 
   const api = {}
@@ -48,4 +48,5 @@ module.exports = (definition, adapter) => {
   return api
 }
 
+module.exports = api
 module.exports.core = core

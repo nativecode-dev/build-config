@@ -3,6 +3,9 @@
     "presets": "es2015"
   },
   "clean": {
-    "src": ["dist", "etc"]
+    "src": [
+      "dist",
+      "etc"
+    ]
   }
 }

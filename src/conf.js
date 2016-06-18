@@ -1,9 +1,15 @@
+
+/**
+ * Helper to read configuration files and merge into a single
+ * configuration object.
+ * @param {object} - Provides shared functionality.
+ */
 module.exports = core => {
   const load = (filename, cwd) => {
     cwd = cwd || process.cwd()
     filename = core.path.join(cwd, filename)
     if (process.env.debug) {
-      core.debug('Reading configuration %s.', filename)
+      core.debug("Reading '%s' in '%s'.", core.path.basename(filename), core.path.dirname(filename))
     }
     return core.config(filename)
   }
@@ -15,16 +21,16 @@ module.exports = core => {
     const parent = core.path.resolve(process.cwd(), '../')
 
     if (core.exists(filename, home)) {
-      core.debug('Found %s in %s', filename, home)
+      core.debug("Reading '%s' in '%s'.", filename, home)
       return core.json(core.path.join(home, filename))
     } else if (core.exists(filename, local)) {
-      core.debug('Found %s in %s', filename, local)
+      core.debug("Reading '%s' in '%s'.", filename, local)
       return core.json(core.path.join(local, filename))
     } else if (core.exists(filename, parent)) {
-      core.debug('Found %s in %s', filename, parent)
+      core.debug("Reading '%s' in '%s'.", filename, parent)
       return core.json(core.path.join(parent, filename))
     }
-    core.debug('Failed to find %s anywhere.', filename)
+    core.debug("Failed to find '%s' anywhere.", filename)
     return {}
   }
 

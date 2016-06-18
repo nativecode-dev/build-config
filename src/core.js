@@ -4,18 +4,28 @@ const core = {
   args: args => Array.prototype.slice.call(args),
   array: value => core.is.array(value) ? value : core.defined(value) ? [value] : [],
   buffer: filename => new Buffer(core.stream(filename)),
+  colorize: (color, ...args) => {
+    return core.colors[color](sprintf(...args))
+  },
+  colormap: {
+    debug: 'gray',
+    error: 'red',
+    info: 'white',
+    warn: 'yellow'
+  },
+  colors: require('chalk'),
   config: filename => {
     const json = core.json(filename)
     return core.resolve(json)
   },
   defined: value => value !== null && value !== undefined && value !== '' && (value && value.length),
-  debug: function () {
+  debug: (...args) => {
     if (process.env.debug) {
-      const message = core.print.apply(null, core.args(arguments))
-      console.log(message)
+      console.log(core.log('debug', ...args))
     }
   },
   dir: path => core.path.join(process.cwd(), path),
+  error: (...args) => core.log('error', ...args),
   exists: (path, cwd) => {
     cwd = cwd || process.cwd()
     if (!path) return false
@@ -39,6 +49,10 @@ const core = {
     string: value => value && typeof value === 'string'
   },
   json: filename => JSON.parse(core.buffer(filename)),
+  log: (type, ...args) => {
+    const color = core.colormap[type] || 'white'
+    return core.colorize(color, ...args)
+  },
   mapdeep: (hash, action) => {
     Object.keys(hash).map(key => {
       const value = action(key, hash[key])
@@ -50,13 +64,6 @@ const core = {
   merge: require('merge').recursive,
   os: require('os'),
   path: require('path'),
-  print: function () {
-    const args = core.args(arguments)
-    const message = (args.length === 1)
-      ? sprintf.apply(null, args[0])
-      : sprintf.apply(null, args)
-    return message
-  },
   render: require('mustache').render,
   require: value => {
     if (!value) throw new Error('Required value was not provided.')
@@ -98,7 +105,8 @@ const core = {
       }
     })
     return results
-  }
+  },
+  warn: (...args) => core.log('warn', ...args)
 }
 
 module.exports = core
