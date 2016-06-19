@@ -1,8 +1,6 @@
-import {Environment, EnvironmentFileSystem} from './Environment';
+/// <reference path="../typings/index.d.ts" />
 
-import fs = require('fs');
-import {} from 'path';
-import {} from 'process';
+import {Environment, EnvironmentFileSystem} from './Environment';
 
 class ProcessEnvironmentFileSystem implements EnvironmentFileSystem {
     get cwd(): string {
@@ -11,6 +9,10 @@ class ProcessEnvironmentFileSystem implements EnvironmentFileSystem {
 
     basename(filename: string): string {
         return path.basename(filename)
+    }
+
+    exists(filename: string): string {
+
     }
 }
 
@@ -29,7 +31,6 @@ class ProcessEnvironment implements Environment {
         return this._files;
     }
 }
-
 
 export default class BuildConfig {
 
