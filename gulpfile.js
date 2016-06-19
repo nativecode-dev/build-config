@@ -32,9 +32,8 @@ gulp.bt.build({
 })
 
 gulp.bt.reload('test').when({
-  'lib/**/*.js': ['test'],
   'lib/**/*.json': ['test'],
-  'lib/v2/**/*.ts': ['test'],
+  'lib/**/*.ts': ['test'],
   'test/**/*.js': ['test']
 })
 
@@ -43,7 +42,7 @@ gulp.bt.publish({ tasks: ['test']}).npm()
 gulp.task('clean', () => gulp.src($.clean.src).pipe(plugin.clean()))
 gulp.task('default', ['test'])
 
-gulp.task('test', ['build:js', 'build:ts'], () => {
+gulp.task('test', ['build'], () => {
   return gulp.src('test/**/*.js', {read: false})
     .pipe(plugin.debug({title: 'tests:'}))
     .pipe(plugin.mocha({reporter: process.env['TEAMCITY_AGENT_NAME'] ? 'mocha-teamcity-reporter' : 'nyan'}))

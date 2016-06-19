@@ -1,6 +1,7 @@
 /// <reference path="../typings/index.d.ts" />
 
 import {Environment, EnvironmentFileSystem} from './Environment';
+import * as path from 'path';
 
 class ProcessEnvironmentFileSystem implements EnvironmentFileSystem {
     get cwd(): string {
@@ -11,8 +12,16 @@ class ProcessEnvironmentFileSystem implements EnvironmentFileSystem {
         return path.basename(filename)
     }
 
-    exists(filename: string): string {
+    exists(filename: string): boolean {
+        return false;
+    }
 
+    normalize(filename: string): string {
+        return filename;
+    }
+
+    resolve(...segments): string {
+        return path.resolve(...segments);
     }
 }
 

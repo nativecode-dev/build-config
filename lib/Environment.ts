@@ -9,5 +9,5 @@ export interface EnvironmentFileSystem {
     basename(filename: string): string;
     exists(filename: string, cwd?: string): boolean;
     normalize(filename: string): string;
-    resolve(...parts: string[]): string;
+    resolve(...segments: string[]): string;
 }
