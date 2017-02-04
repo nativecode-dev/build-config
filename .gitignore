@@ -5,4 +5,4 @@ node_modules/
 
 .npmrc
 npm-debug.log
-npm-shrinkwrap.js
+npm-shrinkwrap.json
