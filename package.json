@@ -14,7 +14,7 @@
     "type": "git",
     "url": "git+https://github.com/nativecode-dev/build-config.git"
   },
-  "version": "0.0.1",
+  "version": "0.0.2",
   "bugs": {
     "url": "https://github.com/nativecode-dev/build-config/issues"
   },
@@ -44,7 +44,6 @@
     "test": "gulp clean && gulp test"
   },
   "publishConfig": {
-    "tag": "unstable",
     "registry": "https://npm.nativecode.com/repository/npm-nativecode/"
   }
 }
