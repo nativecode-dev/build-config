@@ -2,6 +2,9 @@ module.exports = {
   debug: {
     js: {
       title: 'js'
+    },
+    json: {
+      title: 'json'
     }
   },
   destination: {
@@ -9,10 +12,15 @@ module.exports = {
   },
   plugins: {
     babel: {
-      presets: "es2015"
+      presets: 'es2015'
+    },
+    mocha: {
+      reporter: 'spec'
     }
   },
   sources: {
-    js: ['src/**/*.js']
+    js: ['src/**/*.js'],
+    json: ['src/**/*.json'],
+    tests: ['tests/**/*.js']
   }
 }

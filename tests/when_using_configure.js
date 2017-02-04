@@ -1,5 +1,5 @@
-const core = require('../dist/core.js')
-const configure = require('../dist/configure.js')(core, {})
+const core = require('../lib/core.js')
+const configure = require('../lib/configure.js')(core, {})
 const expect = require('chai').expect
 
 describe('when using the configurator', () => {

@@ -1,4 +1,4 @@
-const core = require('../dist/core.js')
+const core = require('../lib/core.js')
 const expect = require('chai').expect
 
 describe('when using core functions', () => {

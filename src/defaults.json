@@ -7,7 +7,7 @@
     },
     "debug": false,
     "destinations": {
-      "default": "dist"
+      "default": "lib"
     },
     "dest": ":{{{common.destinations.default}}}",
     "key": {
@@ -15,7 +15,7 @@
       "public": null
     },
     "main": [
-      "dist/index.js"
+      "lib/index.js"
     ],
     "names": {
       "build": "build",

@@ -47,7 +47,7 @@ module.exports = core => {
 
   return (filenames, attach) => {
     filenames = core.array(filenames)
-    var voltron = core.merge(true, {}, coreconfig)
+    let voltron = core.merge(true, {}, coreconfig)
     Object.keys(filenames).map(index => {
       const filename = filenames[index]
       const userconfig = filename && core.exists(filename) ? load(filename) : {}

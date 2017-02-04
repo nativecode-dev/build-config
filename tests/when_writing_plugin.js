@@ -1,4 +1,4 @@
-const config = require('../dist/index.js')
+const config = require('../lib/index.js')
 const expect = require('chai').expect
 
 describe('when writing plugin methods', () => {
