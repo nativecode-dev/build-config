@@ -17,9 +17,7 @@ gulp.task('build:json', () => {
     .pipe(gulp.dest($.destination.lib))
 })
 
-gulp.task('clean', ['clean:js'])
-
-gulp.task('clean:js', () => {
+gulp.task('clean', () => {
   return gulp.src($.destination.lib)
     .pipe(plugins.clean())
 })
