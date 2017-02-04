@@ -1,7 +1,8 @@
 .vscode/
 node_modules/
 src/
-test/
+tests/
 
 .npmrc
-gulpfile.*
+gulpfile.js
+gulpfile.config.js
