@@ -1,45 +1,22 @@
-const gulp = require('gulp-build-tasks')(require('gulp'))
-const plugin = require('gulp-load-plugins')()
+const gulp = require('gulp')
+const plugins = require('gulp-load-plugins')()
 
-const $ = gulp.bt.config
+const $ = require('./gulpfile.config.js')
 
-plugin.teamcityReporter.wireTaskEvents()
+gulp.task('build', ['build:js'])
 
-gulp.bt.build({
-  js: {
-    build: stream => stream
-      .pipe(plugin.babel($.babel))
-      .pipe(gulp.dest('dist')),
-    src: ['src/**/*.js'],
-    tasks: ['build:jslint']
-  },
-  jslint: {
-    build: stream => stream
-      .pipe(plugin.standard())
-      .pipe(plugin.standard.reporter('stylish', { breakOnError: false })),
-    src: ['src/**/*.js'],
-    tasks: ['build:json']
-  },
-  json: {
-    build: stream => stream
-      .pipe(gulp.dest('dist')),
-    src: ['src/**/*.json']
-  }
+gulp.task('build:js', () => {
+  return gulp.src($.sources.js)
+    .pipe(plugins.debug($.debug.js))
+    .pipe(plugins.babel($.plugins.babel))
+    .pipe(gulp.dest($.destination.lib))
 })
 
-gulp.bt.reload('test').when({
-  'src/**/*.js': ['test'],
-  'src/**/*.json': ['test'],
-  'test/**/*.js': ['test']
+gulp.task('clean', ['clean:js'])
+
+gulp.task('clean:js', () => {
+  return gulp.src($.destination.lib)
+    .pipe(plugins.clean())
 })
 
-gulp.bt.publish({ tasks: ['test']}).npm()
-
-gulp.task('clean', () => gulp.src($.clean.src).pipe(plugin.clean()))
-gulp.task('default', ['test'])
-
-gulp.task('test', ['build:js'], () => {
-  return gulp.src('test/**/*.js', {read: false})
-    .pipe(plugin.debug({title: 'tests:'}))
-    .pipe(plugin.mocha({reporter: process.env['TEAMCITY_AGENT_NAME'] ? 'mocha-teamcity-reporter' : 'nyan'}))
-})
+gulp.task('default', ['build'])

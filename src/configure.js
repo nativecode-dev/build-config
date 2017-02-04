@@ -6,7 +6,11 @@ module.exports = (core, adapter) => {
 
   return definition => {
     core.require(definition)
-    const defaults = core.merge(true, loader(core.array(adapter.configfile)), { common: { debug: !!process.env.debug } })
+    const defaults = core.merge(true, loader(core.array(adapter.configfile)), {
+      common: {
+        debug: !!process.env.debug
+      }
+    })
     const configuration = {
       builds: {},
       watches: {}

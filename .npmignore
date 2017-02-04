@@ -1,3 +1,7 @@
-gulpfile.*
+.vscode/
+node_modules/
 src/
 test/
+
+.npmrc
+gulpfile.*

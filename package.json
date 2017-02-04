@@ -1,5 +1,20 @@
 {
   "author": "NativeCode Development <support@nativecode.com> (https://www.nativecode.com)",
+  "description": "Generic build definitions.",
+  "homepage": "https://github.com/nativecode-dev/build-config#readme",
+  "keywords": [
+    "build",
+    "configuration",
+    "node"
+  ],
+  "license": "MIT",
+  "main": "lib/index.js",
+  "name": "build-config",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nativecode-dev/build-config.git"
+  },
+  "version": "1.1.20",
   "bugs": {
     "url": "https://github.com/nativecode-dev/build-config/issues"
   },
@@ -10,46 +25,20 @@
     "sprintf-js": "^1.0.3"
   },
   "devDependencies": {
-    "babel": "^6.5.2",
     "babel-preset-es2015": "^6.9.0",
     "chai": "^3.5.0",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
-    "gulp-build-tasks": "^1.3.0",
-    "gulp-bump": "^2.1.0",
-    "gulp-cached": "^1.1.0",
     "gulp-clean": "^0.3.2",
     "gulp-debug": "^2.1.2",
-    "gulp-filter": "^4.0.0",
-    "gulp-git": "^1.7.2",
-    "gulp-help": "^1.6.1",
     "gulp-load-plugins": "^1.2.4",
     "gulp-mocha": "^2.2.0",
-    "gulp-mustache": "^2.2.0",
-    "gulp-plumber": "^1.1.0",
-    "gulp-shrinkwrap": "^2.0.1",
-    "gulp-ssh": "^0.5.6",
-    "gulp-standard": "^7.0.1",
-    "gulp-tag-version": "^1.3.0",
-    "gulp-teamcity-reporter": "0.0.2",
-    "gulp-util": "^3.0.7",
-    "gulp-zip": "^3.2.0",
-    "mocha": "^2.5.3",
-    "mocha-teamcity-reporter": "^1.0.0"
+    "mocha": "^2.5.3"
   },
-  "description": "Generic build definitions.",
-  "homepage": "https://github.com/nativecode-dev/build-config#readme",
-  "keywords": [
-    "build",
-    "configuration",
-    "node"
-  ],
-  "license": "MIT",
-  "main": "dist/index.js",
-  "name": "build-config",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/nativecode-dev/build-config.git"
-  },
-  "version": "1.1.20"
+  "scripts": {
+    "build": "gulp build",
+    "clean": "gulp clean",
+    "setup": "npm install && gulp build",
+    "test": "gulp test"
+  }
 }

@@ -1,4 +1,3 @@
-
 /**
  * Helper to read configuration files and merge into a single
  * configuration object.
