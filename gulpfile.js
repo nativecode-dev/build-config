@@ -22,6 +22,17 @@ gulp.task('clean', () => {
     .pipe(plugins.clean())
 })
 
+gulp.task('publish', ['shrinkwrap'], () => {
+  return gulp.src($.sources.package)
+    .pipe(plugins.run('npm publish'))
+})
+
+gulp.task('shrinkwrap', ['build'], () => {
+  return gulp.src($.sources.package)
+    .pipe(plugins.shrinkwrap.lock())
+    .pipe(gulp.dest('.'))
+})
+
 gulp.task('test', ['build'], () => {
   return gulp.src($.sources.tests)
     .pipe(plugins.mocha($.plugins.mocha))

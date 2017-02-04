@@ -1,4 +1,5 @@
 .vscode/
+etc/
 node_modules/
 src/
 tests/

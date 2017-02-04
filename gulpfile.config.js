@@ -21,6 +21,7 @@ module.exports = {
   sources: {
     js: ['src/**/*.js'],
     json: ['src/**/*.json'],
+    package: 'package.json',
     tests: ['tests/**/*.js']
   }
 }
