@@ -5,7 +5,7 @@ const $ = require('./gulpfile.config.js')
 
 gulp.task('build', ['build:js', 'build:json'])
 
-gulp.task('build:js', () => {
+gulp.task('build:js', ['lint:js'], () => {
   return gulp.src($.sources.js)
     .pipe(plugins.debug($.debug.js))
     .pipe(plugins.babel($.plugins.babel))
@@ -14,12 +14,19 @@ gulp.task('build:js', () => {
 
 gulp.task('build:json', () => {
   return gulp.src($.sources.json)
+    .pipe(plugins.debug($.debug.json))
     .pipe(gulp.dest($.destination.lib))
 })
 
 gulp.task('clean', () => {
   return gulp.src($.destination.lib)
     .pipe(plugins.clean())
+})
+
+gulp.task('lint:js', () => {
+  return gulp.src($.sources.js)
+    .pipe(plugins.standard())
+    .pipe(plugins.standard.reporter('default', $.plugins.standard))
 })
 
 gulp.task('test', ['build'], () => {

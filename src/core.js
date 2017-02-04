@@ -79,8 +79,8 @@ const core = {
     }
     return value
   },
-  resolve: (hash, root, all) => {
-    root = root || hash
+  resolve: (hash, options, all) => {
+    const root = options || hash
     Object.keys(hash).map(key => {
       var value = hash[key]
       if (core.is.string(value) && (all || value.indexOf(':') === 0)) {
@@ -96,8 +96,8 @@ const core = {
   taskname: (prefix, name) => [prefix, name].join(':'),
   text: filename => core.stream(filename).toString(),
   unqiue: value => {
-    const hash = {}
-    const results = []
+    let hash = {}
+    let results = []
     Object.keys(value).map(key => {
       if (!hash[key]) {
         hash[key] = key

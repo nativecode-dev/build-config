@@ -16,6 +16,10 @@ module.exports = {
     },
     mocha: {
       reporter: 'spec'
+    },
+    standard: {
+      breakOnError: true,
+      quiet: true
     }
   },
   sources: {

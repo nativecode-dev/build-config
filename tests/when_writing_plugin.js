@@ -14,7 +14,9 @@ describe('when writing plugin methods', () => {
   describe('should be able to override build', () => {
     const api = config(definition, {
       configfile: 'test/test.json',
-      methods: {build: configuration => true }
+      methods: {
+        build: configuration => true
+      }
     })
 
     it('should not throw not supported error', () => expect(api.build).to.not.throw(Error))
