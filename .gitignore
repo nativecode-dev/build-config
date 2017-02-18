@@ -1,8 +1,7 @@
 .vscode/
-etc/
 lib/
 node_modules/
 
-.npmrc
+*.tgz
 npm-debug.log
-npm-shrinkwrap.json
+npm-shrinkwrap.log

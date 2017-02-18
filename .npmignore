@@ -1,9 +1,14 @@
 .vscode/
-etc/
-node_modules/
 src/
 tests/
 
+*.tgz
+.editorconfig
+.jsbeautifyrc
+.npmignore
 .npmrc
+.nvmrc
+.travis.yml
 gulpfile.js
-gulpfile.config.js
+gulpfile.json
+npm-debug.log

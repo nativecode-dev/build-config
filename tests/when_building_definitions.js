@@ -16,6 +16,7 @@ describe('when converting', () => {
       }
 
       const config = configure(standard)
+
       describe('for any', () => {
         it('build should be a function', () => expect(config.builds.any.build).is.instanceof(Function))
         it('should depend on dependency', () => expect(config.builds.any.dependencies).eql(['dependency']))
@@ -31,6 +32,7 @@ describe('when converting', () => {
       }
 
       const config = configure(shorthand)
+
       describe('for javascript', () => {
         it('build should be a function', () => expect(config.builds.javascript.build).is.instanceof(Function))
         it('should have no dependencies', () => expect(config.builds.javascript.dependencies).is.empty)
