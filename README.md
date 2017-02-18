@@ -1,10 +1,10 @@
 # build-config
 
-[![npm](https://img.shields.io/npm/v/buildconfig_continuous.svg?style=flat-square)](https://www.npmjs.com/package/buildconfig_continuous)
-[![Travis](https://img.shields.io/travis/nativecode-dev/buildconfig_continuous.svg?style=flat-square&label=travis)](https://travis-ci.org/nativecode-dev/buildconfig_continuous)
+[![npm](https://img.shields.io/npm/v/build-config.svg?style=flat-square)](https://www.npmjs.com/package/build-config)
+[![Travis](https://img.shields.io/travis/nativecode-dev/build-config.svg?style=flat-square&label=travis)](https://travis-ci.org/nativecode-dev/build-config)
 [![TeamCity](https://img.shields.io/teamcity/https/build.nativecode.com/s/buildconfig_continuous.svg?style=flat-square&label=teamcity)](https://build.nativecode.com/viewType.html?buildTypeId=buildconfig_continuous&guest=1)
-[![David](https://img.shields.io/david/nativecode-dev/buildconfig_continuous.svg?style=flat-square&label=deps)](https://www.npmjs.com/package/buildconfig_continuous)
-[![David](https://img.shields.io/david/dev/nativecode-dev/buildconfig_continuous.svg?style=flat-square&label=devdeps)](https://www.npmjs.com/package/buildconfig_continuous)
+[![David](https://img.shields.io/david/nativecode-dev/build-config.svg?style=flat-square&label=deps)](https://www.npmjs.com/package/build-config)
+[![David](https://img.shields.io/david/dev/nativecode-dev/build-config.svg?style=flat-square&label=devdeps)](https://www.npmjs.com/package/build-config)
 
 # Installation
 ```
