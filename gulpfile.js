@@ -19,7 +19,7 @@ gulp.task('build:json', () => {
 })
 
 gulp.task('clean', () => {
-  return gulp.src($.destination.lib)
+  return gulp.src($.sources.clean)
     .pipe(plugins.debug($.debug.js))
     .pipe(plugins.clean())
 })

@@ -23,6 +23,7 @@
     }
   },
   "sources": {
+    "clean": ["lib/", "*.tgz"],
     "js": ["src/**/*.js"],
     "json": ["src/**/*.json"],
     "tests": ["tests/**/*.js"]
