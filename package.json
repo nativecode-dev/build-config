@@ -2,19 +2,11 @@
   "author": "NativeCode Development <support@nativecode.com> (https://www.nativecode.com)",
   "description": "Generic build definitions.",
   "homepage": "https://github.com/nativecode-dev/build-config",
-  "keywords": [
-    "build",
-    "configuration",
-    "node"
-  ],
+  "keywords": ["build", "configuration", "node"],
   "license": "MIT",
   "main": "lib/index.js",
   "name": "build-config",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/nativecode-dev/build-config.git"
-  },
-  "version": "0.0.2",
+  "version": "1.0.0",
   "bugs": {
     "url": "https://github.com/nativecode-dev/build-config/issues"
   },
@@ -38,14 +30,18 @@
     "gulp-standard": "^8.0.3",
     "mocha": "^3.2.0"
   },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nativecode-dev/build-config.git"
+  },
   "scripts": {
     "build": "gulp build",
     "clean": "gulp clean",
     "prepublish": "gulp clean && gulp test",
     "pretest": "gulp clean",
     "test": "gulp test"
-  },
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
   }
 }

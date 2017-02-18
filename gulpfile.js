@@ -1,7 +1,7 @@
 const gulp = require('gulp')
 const plugins = require('gulp-load-plugins')()
 
-const $ = require('gulp-configly')(__dirname, 'package.json')
+const $ = plugins.configly(__dirname, 'package.json')
 
 gulp.task('build', ['build:js', 'build:json'])
 
